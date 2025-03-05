@@ -1,0 +1,5 @@
+com\example\banking\SimpleBankingApplication.class
+com\example\banking\repository\AccountRepository.class
+com\example\banking\model\Account.class
+com\example\banking\controller\AccountController.class
+com\example\banking\controller\WebController.class
