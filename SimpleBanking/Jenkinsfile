@@ -1,19 +1,20 @@
-pipeline{
-    agent docker{
-        image 'yfhates/simple-test:latest'
+pipeline {
+    agent {
+        docker {
+            image 'yfhates/simple-test:latest'
+        }
     }
 
-    stages{
-        stage('Checkout'){
-            steps{
-            git branch: 'main' , url : 'https://github.com/AmeyD090/java_app.git'
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/AmeyD090/java_app.git'
+            }
         }
-        }
-        stage('Build and Unit testing'){
-            steps{
+        stage('Build and Unit Testing') {
+            steps {
                 sh 'mvn clean package'
             }
         }
     }
 }
-       
