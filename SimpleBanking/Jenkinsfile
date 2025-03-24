@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Build and Unit Testing') {
             steps {
-                sh 'mvn clean package'
+                sh 'cd java_app/SimpleBanking && mvn clean package'
             }
         }
     }
