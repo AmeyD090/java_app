@@ -12,26 +12,6 @@ pipeline{
                 sh 'mvn clean install'
             }
         }
-        stage('Static code analysis'){
-            enviroment{
-                SONAR_URL= ''
-            }
-            steps{
-                withCredentials([string(credentialID : 'sonarqube' , variable : 'SONAR_AUTH_TOKEN')]){
-                    sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
-                }
-            }
-        }
-        stage('Docker image build and push'){
-            enviroment{
-                DOCKER_IMAGE = ''
-                REGISTRY_CREDENTIAL=credentials('docker-cred')
-            }
-            steps{
-                sh 'docker build -t ${DOCKER_IMAGE} .'
-                 docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
-                 docker.image("${DOCKER_IMAGE}").push()
-            }
-        }
     }
 }
+       
