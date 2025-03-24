@@ -11,9 +11,14 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/AmeyD090/java_app.git'
             }
         }
+        stage('Verify Workspace') {
+            steps {
+                sh 'ls -R'
+            }
+        }
         stage('Build and Unit Testing') {
             steps {
-                sh 'cd java_app/SimpleBanking && mvn clean package'
+                sh 'cd SimpleBanking && mvn clean package'
             }
         }
     }
