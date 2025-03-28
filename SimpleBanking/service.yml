@@ -1,0 +1,13 @@
+kind: Service
+metadata:
+  name: banking-app-service
+  labels:
+    app: banking-app
+spec:
+  selector:
+    app: banking-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
