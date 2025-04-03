@@ -1,24 +1,23 @@
-pipeline {
-    agent {
-        docker {
-            image 'maven:3.8.8-eclipse-temurin-17'
+pipeline{
+    agent{
+        docker{
+            image : 'maven:3.8.5-jdk-17'
         }
     }
-
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/AmeyD090/java_app.git'
+    stages{
+        stage('checkout'){
+            steps{
+            git branch : 'main' , url: 'https://github.com/AmeyD090/java_app.git'
             }
         }
-        stage('Verify Workspace') {
-            steps {
-                sh 'ls -R'
+        stage('build test'){
+            steps{
+                sh 'mvn clean install'
             }
         }
-        stage('Build and Unit Testing') {
-            steps {
-                sh 'cd SimpleBanking && mvn clean package'
+        stage('docker build'){
+            steps{
+                sh 'docker build -t banking-app:latest . '
             }
         }
     }
