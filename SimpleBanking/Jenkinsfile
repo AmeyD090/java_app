@@ -1,23 +1,23 @@
-pipeline{
-    agent{
-        docker{
-            image : 'maven:3.8.5-jdk-17'
+pipeline {
+    agent {
+        docker {
+            image 'maven:3.8.5-jdk-17'
         }
     }
-    stages{
-        stage('checkout'){
-            steps{
-            git branch : 'main' , url: 'https://github.com/AmeyD090/java_app.git'
+    stages {
+        stage('checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/AmeyD090/java_app.git'
             }
         }
-        stage('build test'){
-            steps{
+        stage('build test') {
+            steps {
                 sh 'mvn clean install'
             }
         }
-        stage('docker build'){
-            steps{
-                sh 'docker build -t banking-app:latest . '
+        stage('docker build') {
+            steps {
+                sh 'docker build -t banking-app:latest .'
             }
         }
     }
