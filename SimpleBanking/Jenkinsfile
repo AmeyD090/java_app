@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
 
@@ -18,11 +17,14 @@ pipeline {
                 sh 'cd SimpleBanking && mvn clean package'
             }
         }
-        stage('docker image build'){
-            steps{
-                sh 'cd SimpleBanking/'
-                sh 'docker build -t banking-app:latest .'
+        stage('Docker Image Build') {
+            steps {
+                dir('SimpleBanking') {
+                    sh 'ls -la'  // Optional, used for debugging
+                    sh 'docker build -t banking-app:latest .'
+                }
             }
         }
     }
 }
+
