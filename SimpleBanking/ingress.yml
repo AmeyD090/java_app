@@ -3,12 +3,11 @@ kind: Ingress
 metadata:
   name: banking-app-ingress
   annotations:
-    kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
 spec:
+  ingressClassName: alb  # ✅ Use this instead of the old annotation
   rules:
-    - host: ameydeshmukh.shop  # ✅ Add your domain here
+    - host: ameydeshmukh.shop
       http:
         paths:
           - path: /
