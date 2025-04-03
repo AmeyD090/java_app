@@ -1,4 +1,4 @@
-FROM openjdk:17-jre-slim
+FROM openjdk:17-jdk-slim
 WORKDIR /app
 COPY SimpleBanking/target/simple-banking-1.0-SNAPSHOT.jar simple-banking.jar
 EXPOSE 8080
