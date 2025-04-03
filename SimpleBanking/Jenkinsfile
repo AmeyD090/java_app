@@ -4,27 +4,29 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                cleanWs()  // Ensure a clean workspace before checkout
                 git branch: 'main', url: 'https://github.com/AmeyD090/java_app.git'
             }
         }
         stage('Verify Workspace') {
             steps {
-                sh 'ls -R'
+                sh 'pwd'  // Print current directory (should be inside SimpleBanking/)
+                sh 'ls -R'  // List all files and directories
             }
         }
         stage('Build and Unit Testing') {
             steps {
-                sh 'cd java_app/SimpleBanking && mvn clean package'
+                sh 'mvn clean package'  // No need to `cd` because Jenkinsfile is inside `SimpleBanking/`
             }
         }
         stage('Verify Build Artifacts') {
             steps {
-                sh 'ls -l java_app/SimpleBanking/target/'
+                sh 'ls -l target/'  // Ensure the JAR file is built
             }
         }
         stage('Docker Image Build') {
             steps {
-                sh 'docker build -t banking-app:latest -f java_app/Dockerfile java_app/'
+                sh 'docker build -t banking-app:latest -f Dockerfile .'  // Build Docker image using `SimpleBanking/`
             }
         }
     }
