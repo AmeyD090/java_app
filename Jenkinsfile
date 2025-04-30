@@ -77,7 +77,7 @@ pipeline {
                   imageTag=$(grep -oP "(?<=banking-app:\\s)[^\\n]+" deployment.yml)
                   echo "Current image tag: $imageTag"
                   # Replace the tag value with the build number
-                  sed -i "s/tag: ${imageTag}/banking-app: ${BUILD_NUMBER}/" deployment.yaml
+                 sed -i "s/${DOCKER_REPO_NAME}:${imageTag}/${DOCKER_REPO_NAME}:${BUILD_NUMBER}/" deployment.yaml
                   # Commit and push the changes
                   git add values.yml
 
