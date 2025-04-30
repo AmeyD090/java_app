@@ -49,7 +49,7 @@ pipeline {
         }
         stage('Update Deployment file'){
             enviroments{
-                GIT_REPO =
+                GIT_REPO = 'https://github.com/AmeyD090/java_app.git'
                 GIT_USER_NAME = 'AmeyD090'
             }
             withCredentials([usrnamePassword(credentialsId:'' , usernameVariable:'' , passwordvariable:'')]){
@@ -71,6 +71,7 @@ pipeline {
 
                   git commit -m "Updates tag value ${BUILD_NUMBER}"
                   git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/java_app.git HEAD:main
+                 
             }
         }
     }
