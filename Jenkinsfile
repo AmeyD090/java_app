@@ -60,7 +60,7 @@ pipeline {
             }
         }
         stage('Update Deployment file'){
-            enviroments{
+            environment{
                 GIT_REPO = 'https://github.com/AmeyD090/java_app.git'
                 GIT_USER_NAME = 'AmeyD090'
             }
