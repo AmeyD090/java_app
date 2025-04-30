@@ -1,5 +1,5 @@
 # Image configuration
 image:
-  repository:
-  tag: 7
+  repository: yfhates/banking-app
+  tag: 0
   pullPolicy: IfNotPresent # Image pull policy (can be Always, IfNotPresent, Never)
