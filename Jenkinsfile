@@ -19,6 +19,18 @@ pipeline {
                 sh 'ls -R'
             }
         }
+         stage('Sonarqube Analysis') {
+             enviroment{
+                  SCANNER_HOME=tool 'sonar-scanner'
+             }
+            steps {
+                    withSonarQubeEnv('sonar-server') {
+                        sh ''' $SCANNER_HOME/bin/sonar-scanner \
+                        -Dsonar.projectName=java_app \
+                        -Dsonar.projectKey=java_app '''
+                    }
+            }
+        }
         stage('Build and Unit Testing') {
             steps {
                 sh 'cd SimpleBanking && mvn clean package'
@@ -52,7 +64,7 @@ pipeline {
                 GIT_REPO = 'https://github.com/AmeyD090/java_app.git'
                 GIT_USER_NAME = 'AmeyD090'
             }
-            withCredentials([usrnamePassword(credentialsId:'' , usernameVariable:'' , passwordvariable:'')]){
+            withCredentials([usrnamePassword(credentialsId:'github' , usernameVariable:'GITHUB_USER' , passwordvariable:'GITHUB_TOKEN')]){
                 sh '''
                 git config user.email "ameydeshmukh090@gmail.com"
                 git config user.name "AmeyD090"
