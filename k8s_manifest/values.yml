@@ -1,0 +1,5 @@
+# Image configuration
+image:
+  repository:
+  tag: 7
+  pullPolicy: IfNotPresent # Image pull policy (can be Always, IfNotPresent, Never)
