@@ -17,8 +17,6 @@ spec:
       containers:
       - name: banking-app
         image: yfhates/banking-app:latest
-        repository: yfhates/banking-app
-        tag: 0
-        pullPolicy: IfNotPresent # Image pull policy (can be Always, IfNotPresent, Never)
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
